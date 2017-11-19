@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="static/style.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    </head>
+
+    <body>
+        <!-- Body -->
+        <div class="container-fluid">
+            <div>
+            {% block notice %}
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for cat, message in messages %}
+                            <div class="alert alert-{{cat}} alert-dismissible" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            {% endblock %}
+            </div>
+            <div>
+                <div class="col-md-6">
+                    <form class="panel panel-primary" action="/login" method="post">
+                        <div class="panel-heading">Login</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" class="form-control" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" name="password" class="form-control" id="pwd">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form class="panel panel-info" action="/register" method="post">
+                        <div class="panel-heading">Register</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="rusername">Username:</label>
+                                <input type="text" name="username" class="form-control" id="rusername">
+                            </div>
+                            <div class="form-group">
+                                <label for="rpwd">Password:</label>
+                                <input type="password" name="password" class="form-control" id="rpwd">
+                            </div>
+                            <div class="form-group">
+                                <label for="rvpwd">Confirm Password:</label>
+                                <input type="password" class="form-control" id="rvpwd">
+                            </div>
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+    </body> 
+</html>
