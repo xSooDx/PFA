@@ -1,0 +1,25 @@
+<div class="panel-group">
+  {% if transactions is defined %}
+  {% for t in transactions %}
+  
+  <div class="panel panel-{% if t.income %}success{% else %}danger{% endif %}">
+    <div class="panel-heading">
+      
+      <span>{% if t.income %}From{% else %}To{% endif %} <b>{{ t.participant }}</b> &nbsp;&nbsp;</span>
+      <span class="badge"><b>Rs. {{ t.amount }} </b></span>
+      <div class="pull-right">{{ t.date }}&nbsp;:&nbsp;{{t.time}} &nbsp; &nbsp; <span class="label label-primary">{{t.category}} </span></div>
+    </div>
+    {% if t.note != None%}
+    <div class="panel-body">          
+      {{ t.note }}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  {%else%}
+  <div class="panel panel-warning">
+    <div class="panel-heading">No transactions found</div>
+  </div>
+  {%endif%}
+
+</div>

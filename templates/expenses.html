@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body%}
+  <div class="row">
+  <div class="col-md-3">
+    {% include 'widgets/addTransaction.html' %}
+  </div>
+  <div class="col-md-9">
+    {% include 'widgets/transactionView.html' %}
+  </div>
+</div>
+{% endblock %}

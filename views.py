@@ -59,6 +59,13 @@ def register():
 def dashboard():
     return render_template('dashboard.html', page=PageData('dashboard', 'Dashboard'))
 
+
+@app.route('/expenses', methods=["GET"])
+@login_required
+def expenses():
+    return render_template('expenses.html', page=PageData('expenses', 'Expenses'))
+
+
 '''
 @app.route('/debts', methods=["GET"])
 @login_required

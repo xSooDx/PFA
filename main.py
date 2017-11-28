@@ -10,3 +10,4 @@ class PageData:
 app = Flask(__name__)
 
 import views
+import taxes

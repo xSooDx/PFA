@@ -1,0 +1,128 @@
+
+<!--
+    income=int(request.form.get('income'))
+    age=int(request.form.get('age'))
+    shortStockEq=int(request.form.get('shortStockEq'))
+    shortDebtMF=int(request.form.get('shortDebtMF'))
+    longDebtMF=int(request.form.get('longDebtMF'))
+    businessIncome=int(request.form.get('businessIncome'))
+    deductableExpenses=int(request.form.get('deductableExpenses'))
+    otherSourcesTotal=int(request.form.get('otherSourcesTotal'))
+    rentReceived=int(request.form.get('rentReceived'))
+    municipalTaxesPaid=int(request.form.get('municipalTaxesPaid'))
+    homeLoanInterestPaid=int(request.form.get('homeLoanInterestPaid'))
+    isSelfOccupied=int(request.form.get('isSelfOccupied'))
+    isAquiredConstructed=int(request.form.get('isAquiredConstructed'))
+-->
+
+<div class="panel panel-primary">
+  <div class="panel-heading"> Tax Calculator </div>
+  <div class="panel-body">
+    <form class="form-horizontal" action="taxCalculator" method="post">
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="participant">Income</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" name="income" id="income" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Age</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="age" id="age" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total short term gains from stocks</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="shortStockEq" id="shortStockEq" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total gains from short term debt Mutual Funds</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="shortDebtMF" id="shortDebtMF" value="0" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total gains from long term debt Mutual Funds</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="longDebtMF" id="longDebtMF" value="0">
+        </div>
+      </div>
+            <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Business Income</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="businessIncome" id="businessIncome" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total deductible expenses</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="deductableExpenses" id="deductableExpenses" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total income from other sources</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="otherSourcesTotal" id="otherSourcesTotal" value="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Total income from rent</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="rentReceived" id="rentReceived" value="0">
+        </div>
+      </div>
+
+       <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Municipal taxes paid</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="municipalTaxesPaid" id="municipalTaxesPaid" value="0">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Home loan interest paid</label>
+        <div class="col-sm-7"> 
+          <input type="text" class="form-control" name="homeLoanInterestPaid" id="homeLoanInterestPaid" value="0">
+        </div>
+      </div>
+
+            <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Is property acquired or constructed</label>
+        <div class="col-sm-7"> 
+          <select name="isAquiredConstructed" id="isAquiredConstructed" class="form-control">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-5" for="amt">Self Occupied</label>
+        <div class="col-sm-7"> 
+          <select name="isSelfOccupied" id="isSelfOccupied" class="form-control">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+      </div>
+
+
+         <div class="form-group">
+        <label class="control-label col-sm-5" for="participant"></label>
+        <div class="col-sm-7">
+           <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    
+    </form>
+  </div>
+</div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">Tax Payable</div>
+    <div class="panel-footer">{{tax}}</div>
+</div>
