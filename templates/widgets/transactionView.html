@@ -1,5 +1,5 @@
 <div class="panel-group">
-  {% if transactions is defined %}
+  {% if transactions != None %}
   {% for t in transactions %}
   
   <div class="panel panel-{% if t.income %}success{% else %}danger{% endif %}">
@@ -9,9 +9,9 @@
       <span class="badge"><b>Rs. {{ t.amount }} </b></span>
       <div class="pull-right">{{ t.date }}&nbsp;:&nbsp;{{t.time}} &nbsp; &nbsp; <span class="label label-primary">{{t.category}} </span></div>
     </div>
-    {% if t.note != None%}
+    {% if t.name != None %}
     <div class="panel-body">          
-      {{ t.note }}
+      {{ t.name }}
     </div>
     {% endif %}
   </div>

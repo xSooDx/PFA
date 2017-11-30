@@ -1,0 +1,29 @@
+<div class="panel-group">
+  {% if debts != None %}
+  {% for t in debts %}
+  
+  <div class="panel panel-{% if t.income %}success{% else %}danger{% endif %}">
+    <div class="panel-heading">
+      
+      <span>{% if t.income %}From{% else %}To{% endif %} <b>{{ t.participant }}</b> &nbsp;</span>
+      <span class="badge"><b>Rs. {{ t.amount }} </b></span>&nbsp;&nbsp; 
+      {%if t.duedate != None %}<span style="color:{%if t.income %}red{%else%}green {%endif%}">
+        due on {{t.duedate}}
+      </span>{%endif%}
+      <div class="pull-right">{{ t.date }}&nbsp;:&nbsp;{{t.time}} &nbsp; &nbsp; <span class="label label-primary">{{t.category}} </span></div>
+      <!--div class="pull-right"><input class="btn btn-default" type="button" value="Clear"></div-->
+    </div>
+    {% if t.name != None %}
+    <div class="panel-body">          
+      {{ t.name }}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  {%else%}
+  <div class="panel panel-warning">
+    <div class="panel-heading">No debts found</div>
+  </div>
+  {%endif%}
+
+</div>

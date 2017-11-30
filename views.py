@@ -63,8 +63,44 @@ def dashboard():
 @app.route('/expenses', methods=["GET"])
 @login_required
 def expenses():
-    return render_template('expenses.html', page=PageData('expenses', 'Expenses'))
+    ts = act.getTransactions(session['id'])
+    return render_template('expenses.html', page=PageData('expenses', 'Expenses'), transactions=ts)
 
+
+@app.route('/expenses/addexpense', methods=["POST"])
+@login_required
+def add_expense():
+    if request.method == "POST":
+        p = request.form.get('participant')
+        a = request.form.get('amount')
+        n = request.form.get('note')
+        c = request.form.get('category')
+        t = request.form.get('timestamp')
+        i = request.form.get('income')
+        act.addTransactions(session['id'], a, i, n, p, c, t)
+        return redirect(url_for('expenses'))
+
+
+@app.route('/debts', methods=["GET"])
+@login_required
+def debts():
+    ds = act.getDebts(session['id'])
+    return render_template('debts.html', page=PageData('debts', 'Debts'), debts=ds)
+
+
+@app.route('/debts/adddebt', methods=["POST"])
+@login_required
+def add_debt():
+    if request.method == "POST":
+        p = request.form.get('participant')
+        a = request.form.get('amount')
+        n = request.form.get('note')
+        c = request.form.get('category')
+        t = request.form.get('timestamp')
+        d = request.form.get('duedate')
+        i = request.form.get('income')
+        act.addDebt(session['id'], a, i, n, p, c, t, d)
+        return redirect(url_for('debts'))
 
 '''
 @app.route('/debts', methods=["GET"])

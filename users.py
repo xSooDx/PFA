@@ -5,9 +5,9 @@ import MySQLdb
 def testCredentials(username, password):
     c, conn = dbm.DBconnect()
     c.execute("SELECT * from user where username = '{}' and password = '{}'".format(username, password))
-    res = c.fetchall()
+    res = c.fetchone()
     dbm.DBclose(c, conn)
-    if len(res) == 1:
+    if res:
         return True, res
     return False, None
 
