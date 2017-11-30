@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+{% block scripts %}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{%endblock%}
+{% block body %}
+        <input id="textinputID" type="text" name="textinput"><br>
+        <script type="text/javascript">
+            var data
+            // have to change the local host port in all the functions below
+            function avg_amt() {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/avg_amt_per_transaction",
+                    data: {'data': document.getElementById('textinputID').value},
+                    success: function(response) {
+                        // console.log(response)
+                        mydiv = document.getElementById("myDiv");
+                        mydiv.innerHTML = "Average amount spent per Transaction: " + response;
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+
+            function mean_ex_month() {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/mean_ex_month",
+                    data: {'data': document.getElementById('textinputID').value},
+                    success: function(response) {
+                        // console.log(response)
+                        mydiv = document.getElementById("myDiv");
+                        mydiv.innerHTML = "Average amount spent per Month: " + response;
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+
+            function expenditures() {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/expenditures",
+                    data: {'data': document.getElementById('textinputID').value},
+                    success: function(response) {
+                        // console.log(response)
+                        data = [response]
+                        Plotly.newPlot('myDiv', data); 
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+
+            function mean_ex_category() {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/mean_ex_category",
+                    data: {'data': document.getElementById('textinputID').value},
+                    success: function(response) {
+                        // console.log(response)
+                        mydiv = document.getElementById("myDiv");
+                        mydiv.innerHTML = "Average amount spent per Category: " + response;
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+
+            function pie_chart() {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/pie_chart",
+                    data: {'data': document.getElementById('textinputID').value},
+                    success: function(response) {
+                        // console.log(response)
+                        data = [response]
+                        Plotly.newPlot('myDiv', data);
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+
+        </script>
+        <button onclick="avg_amt()">Average Amount per Transaction</button><br>
+        <button onclick="mean_ex_month()">Mean Expenditures Per Month</button><br>
+        <button onclick="expenditures()">Monthwise Expenditures</button><br>
+        <button onclick="mean_ex_category()">Mean Expenditures Per Category</button><br>
+        <button onclick="pie_chart()">Category Wise expenditures</button><br>
+        <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+{% endblock %}

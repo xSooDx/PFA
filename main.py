@@ -11,3 +11,4 @@ app = Flask(__name__)
 
 import views
 import taxes
+import analytics
