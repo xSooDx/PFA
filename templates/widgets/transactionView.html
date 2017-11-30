@@ -7,7 +7,10 @@
       
       <span>{% if t.income %}From{% else %}To{% endif %} <b>{{ t.participant }}</b> &nbsp;&nbsp;</span>
       <span class="badge"><b>Rs. {{ t.amount }} </b></span>
-      <div class="pull-right">{{ t.date }}&nbsp;:&nbsp;{{t.time}} &nbsp; &nbsp; <span class="label label-primary">{{t.category}} </span></div>
+      <div class="pull-right">
+        {{ t.date }}:{{t.time}} &nbsp; &nbsp; 
+        <span class="label label-primary">{{t.category}} </span>
+      </div>
     </div>
     {% if t.name != None %}
     <div class="panel-body">          

@@ -69,7 +69,7 @@ def mean_ex_category():
 def expenditures():
     curs, conn = dbm.DBconnect()
 
-    query = "SELECT monthname(timestamp) ,SUM(amount) FROM transaction where user_id = {} GROUP BY monthname(timestamp)".format(
+    query = "SELECT monthname(timestamp) as 'month' ,SUM(amount) as 'sum' FROM transaction where user_id = {} GROUP BY monthname(timestamp)".format(
         session['id'])
 
     curs.execute(query)
@@ -78,8 +78,8 @@ def expenditures():
     exps = []
 
     for i in curs:
-        month.append(i[0])
-        exps.append(i[1])
+        month.append(i['month'])
+        exps.append(i['sum'])
 
     trace1 = {'x': month, 'y': exps, 'type': 'scatter'}
     dbm.DBclose(curs, conn)
@@ -91,7 +91,7 @@ def expenditures():
 def pie_chart():
     curs, conn = dbm.DBconnect()
 
-    query = "SELECT category ,SUM(amount) FROM transaction where user_id = {} GROUP BY category".format(session['id'])
+    query = "SELECT category ,SUM(amount)as 'sum' FROM transaction where user_id = {} GROUP BY category".format(session['id'])
 
     curs.execute(query)
 
@@ -99,8 +99,8 @@ def pie_chart():
     exps = []
 
     for i in curs:
-        category.append(i[0])
-        exps.append(i[1])
+        category.append(i['category'])
+        exps.append(i['sum'])
 
     trace1 = {'values': exps, 'labels': category, 'type': 'pie'}
     dbm.DBclose(curs, conn)

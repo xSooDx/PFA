@@ -10,7 +10,7 @@
       {%if t.duedate != None %}<span style="color:{%if t.income %}red{%else%}green {%endif%}">
         due on {{t.duedate}}
       </span>{%endif%}
-      <div class="pull-right">{{ t.date }}&nbsp;:&nbsp;{{t.time}} &nbsp; &nbsp; <span class="label label-primary">{{t.category}} </span></div>
+      <div class="pull-right">{{ t.date }}:{{t.time}} &nbsp; <span class="label label-primary">{{t.category}} </span></div>
       <!--div class="pull-right"><input class="btn btn-default" type="button" value="Clear"></div-->
     </div>
     {% if t.name != None %}

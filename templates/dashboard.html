@@ -1,7 +1,21 @@
 {% extends 'layout.html' %}
-
+  
 {% block body%}
-<div class="col-md-6">
+<div class="col-md-7">
+  <h3 class="text-info">Recent transactions</h3>
+  {% include 'widgets/transactionView.html'%}
+  <h3 class="text-info">Recent debts</h3>
+  {% include 'widgets/debtView.html'%}
+  <hr/>
+  
+  
+  
+</div>
+<div class="col-md-5">
+  
+  
   {% include 'widgets/addTransaction.html' %}
+  {% include 'widgets/addDebt.html' %}
+  
 </div>
 {% endblock %}

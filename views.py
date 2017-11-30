@@ -19,6 +19,8 @@ def login_required(f):
 @app.route('/')
 @app.route('/index')
 def index():
+    if 'id' in session:
+        return redirect(url_for('dashboard'))
     return render_template('index.html')
 
 
@@ -32,6 +34,13 @@ def login():
         flash("Invalid Login", category="danger")
     else:
         flash("Invalid Action", category="danger")
+    return redirect(url_for('index'))
+
+
+@app.route('/logout', methods=["GET","POST"])
+@login_required
+def logout():
+    session.clear()
     return redirect(url_for('index'))
 
 
@@ -57,7 +66,13 @@ def register():
 @app.route('/dashboard', methods=["GET"])
 @login_required
 def dashboard():
-    return render_template('dashboard.html', page=PageData('dashboard', 'Dashboard'))
+    ds = act.getDebts(session['id'])[:5]
+    if ds is not None:
+        ds = ds[:5]
+    ts = act.getTransactions(session['id'])
+    if ts is not None:
+        ts = ts[:5]
+    return render_template('dashboard.html', page=PageData('dashboard', 'Dashboard'), transactions=ts, debts=ds)
 
 
 @app.route('/expenses', methods=["GET"])
@@ -101,6 +116,7 @@ def add_debt():
         i = request.form.get('income')
         act.addDebt(session['id'], a, i, n, p, c, t, d)
         return redirect(url_for('debts'))
+
 
 '''
 @app.route('/debts', methods=["GET"])

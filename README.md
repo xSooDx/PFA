@@ -1,7 +1,7 @@
 # PFA
 
-import the pfa.sql file into myphp admin
-set up a suer for the pfa database with all privlleges as:
+import the pfa.sql file into phpMyAdmin
+set up a user for the pfa database with all privileges as:
 
 host = "localhost"
 username = 'pfa'
