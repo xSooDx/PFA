@@ -1,0 +1,45 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div class="panel panel-info">
+    <div class="panel-heading">{% if income==0 %}Expense Graph{% else %} Income Graph {%endif%} </div>
+    <div class="panel-body" style="min-height:300px" id="{{divid}}"></div>
+    <div class="panel-footer" id="{{divid}}foot">
+        <h5>Average Expenses:</h5>
+    </div>
+    <script>
+    function expenditures(id, income=0) {
+        $.ajax({
+            method: 'GET',
+            url: "/analytics/expenditures/"+income,
+            data:null,
+            success: function(response) {
+                // console.log(response)
+                data = [response]
+                Plotly.newPlot(id, data); 
+            },
+            error: function(response) {
+                console.error(response)
+            }
+        });
+    }
+    function mean_ex_month(id,income=0) {
+                $.ajax({
+                    method: 'GET',
+                    url: "/analytics/mean_ex_month/"+income,
+                    data: null,
+                    success: function(response) {
+                        // console.log(response)
+                        mydiv = $("#"+id);
+                        for (var key in response){
+                            mydiv.append($("<div><b>"+key+"</b> : <span class='badge'>Rs. "+ response[key] +"</span></div>"))
+                        }
+                    },
+                    error: function(response) {
+                        console.error(response)
+                    }
+                });
+            }
+    
+    expenditures('{{divid}}',{{income}})
+    mean_ex_month('{{divid}}foot',{{income}})
+    </script>
+</div>

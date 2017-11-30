@@ -1,9 +1,30 @@
 {% extends 'layout.html' %}
-{% block scripts %}
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-{%endblock%}
+
 {% block body %}
-        <input id="textinputID" type="text" name="textinput"><br>
+    <div class="row">
+    <div class="col-lg-6">
+        {% with income=0, divid='pex' %}
+        {% include 'widgets/pieChart.html' %}
+        {% endwith %}
+    </div>
+    <div class="col-lg-6">
+        {% with income=1, divid='pin'     %}
+        {% include 'widgets/pieChart.html' %}
+        {% endwith %}
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-6">
+        {% with income=0, divid='bex' %}
+        {% include 'widgets/monthEx.html' %}
+        {% endwith %}
+    </div>
+    <div class="col-lg-6">
+        {% with income=1, divid='bin'     %}
+        {% include 'widgets/monthEx.html' %}
+        {% endwith %}
+    </div>
+    </div>
         <script type="text/javascript">
             var data
             // have to change the local host port in all the functions below
@@ -23,75 +44,7 @@
                 });
             }
 
-            function mean_ex_month() {
-                $.ajax({
-                    method: 'GET',
-                    url: "/analytics/mean_ex_month",
-                    data: {'data': document.getElementById('textinputID').value},
-                    success: function(response) {
-                        // console.log(response)
-                        mydiv = document.getElementById("myDiv");
-                        mydiv.innerHTML = "Average amount spent per Month: " + response;
-                    },
-                    error: function(response) {
-                        console.error(response)
-                    }
-                });
-            }
-
-            function expenditures() {
-                $.ajax({
-                    method: 'GET',
-                    url: "/analytics/expenditures",
-                    data: {'data': document.getElementById('textinputID').value},
-                    success: function(response) {
-                        // console.log(response)
-                        data = [response]
-                        Plotly.newPlot('myDiv', data); 
-                    },
-                    error: function(response) {
-                        console.error(response)
-                    }
-                });
-            }
-
-            function mean_ex_category() {
-                $.ajax({
-                    method: 'GET',
-                    url: "/analytics/mean_ex_category",
-                    data: {'data': document.getElementById('textinputID').value},
-                    success: function(response) {
-                        // console.log(response)
-                        mydiv = document.getElementById("myDiv");
-                        mydiv.innerHTML = "Average amount spent per Category: " + response;
-                    },
-                    error: function(response) {
-                        console.error(response)
-                    }
-                });
-            }
-
-            function pie_chart() {
-                $.ajax({
-                    method: 'GET',
-                    url: "/analytics/pie_chart",
-                    data: {'data': document.getElementById('textinputID').value},
-                    success: function(response) {
-                        // console.log(response)
-                        data = [response]
-                        Plotly.newPlot('myDiv', data);
-                    },
-                    error: function(response) {
-                        console.error(response)
-                    }
-                });
-            }
-
+          
         </script>
-        <button onclick="avg_amt()">Average Amount per Transaction</button><br>
-        <button onclick="mean_ex_month()">Mean Expenditures Per Month</button><br>
-        <button onclick="expenditures()">Monthwise Expenditures</button><br>
-        <button onclick="mean_ex_category()">Mean Expenditures Per Category</button><br>
-        <button onclick="pie_chart()">Category Wise expenditures</button><br>
-        <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+        <!--button onclick="avg_amt()">Average Amount per Transaction</button><br-->
 {% endblock %}
